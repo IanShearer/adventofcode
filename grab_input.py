@@ -78,7 +78,6 @@ func main() {
 """)
     
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-y', '--year', help="year", default=today.strftime("%Y"))
 parser.add_argument('-d', '--day', help="day", default=today.strftime("%d"))
