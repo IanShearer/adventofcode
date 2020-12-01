@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
 func main() {
+
+	totalTime := time.Now()
 
 	data, err := ioutil.ReadFile("2020/inputs/day01.txt")
 	if err != nil {
@@ -16,6 +19,8 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Could not get slice information: {%s}", err))
 	}
+
+	partOneTimeBegin := time.Now()
 
 	var partOne int
 	var found bool
@@ -34,7 +39,11 @@ func main() {
 		}
 	}
 
+	partOneTime := time.Now().Sub(partOneTimeBegin)
+
 	fmt.Println("Part one:", partOne)
+
+	partTwoTimeBegin := time.Now()
 
 	var partTwo int
 	found = false
@@ -58,6 +67,13 @@ func main() {
 		}
 	}
 
+	partTwoTime := time.Now().Sub(partTwoTimeBegin)
+	endTime := time.Now().Sub(totalTime)
+
 	fmt.Println("Part two:", partTwo)
+	fmt.Println("------------------")
+	fmt.Println("Time for Part One:  ", partOneTime)
+	fmt.Println("Time for Part Two:  ", partTwoTime)
+	fmt.Println("Total Time:         ", endTime)
 
 }
