@@ -12,12 +12,15 @@ def grab_input(year, day):
     """
     grabs the input from adventofcode if the data does not already exists
     """
+    print("checking input")
     input_path = f"{year}/inputs/day{day.zfill(2)}.txt"
     if not os.path.isfile(input_path):
+        print("getting data...")
         Path(f"{year}/inputs").mkdir(parents=True, exist_ok=True)
         f = open(input_path, "wb")
         data = requests.get(f"https://adventofcode.com/{year}/day/{day}/input", cookies={'session': os.environ['AOC_SESS']}).content
         f.write(data)
+    print("finished getting input")
 
 def create_template(year, day):
     """
@@ -25,6 +28,7 @@ def create_template(year, day):
     """
     util_path = f"{year}/util.go"
     if not os.path.isfile(util_path):
+        print("creating util file...")
         Path(f"{year}").mkdir(parents=True, exist_ok=True)
         f = open(util_path, 'w')
         f.write("""package main
@@ -57,6 +61,7 @@ func getInputAsStringSlice(d []byte) []string {
 """)
     file_path = f"{year}/day{day.zfill(2)}.go"
     if not os.path.isfile(file_path):
+        print("creating file of the day...")
         Path(f"{year}").mkdir(parents=True, exist_ok=True)
         f = open(file_path, 'w')
         f.write("""
@@ -67,15 +72,44 @@ import (
 	"io/ioutil"
 )
 
+func partOne(someInput interface{}) interface{} {
+
+}
+
+// func partTwo(someInput interface{}) interface{} {
+//
+// }
+
 func main() {
+
+    totalTimeStart := time.Now()
 
 	data, err := ioutil.ReadFile(\""""+year+"""/inputs/day"""+day.zfill(2)+""".txt")
 	if err != nil {
 		panic(fmt.Sprintf("There was an issue reading the file: {%s}", err))
 	}
 
+    // format your input here
+
+    partOneStart := time.Now()
+    partOneAnswer := partOne()
+    fmt.Println("Part One:", partOneAnswer)
+    partOneTime := time.Now().Sub(partOneStart)
+
+    // partTwoStart := time.Now()
+    // partTwoAnswer := partTwo()
+    // fmt.Println("Part Two:", partTwoAnswer)
+    // partTwoTime := time.Now().Sub(partOneStart)
+
+
+    fmt.Println("------------------")
+	fmt.Println("Time for Part One:  ", partOneTime)
+	// fmt.Println("Time for Part Two:  ", partTwoTime)
+	fmt.Println("Total Time:         ", time.Now().Sub(totalTimeStart))
+
 }
 """)
+    print("finished creating files")
     
 
 parser = argparse.ArgumentParser()
