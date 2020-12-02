@@ -99,7 +99,7 @@ func main() {
     // partTwoStart := time.Now()
     // partTwoAnswer := partTwo()
     // fmt.Println("Part Two:", partTwoAnswer)
-    // partTwoTime := time.Now().Sub(partOneStart)
+    // partTwoTime := time.Now().Sub(partTwoStart)
 
 
     fmt.Println("------------------")
