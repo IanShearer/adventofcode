@@ -12,7 +12,6 @@ def grab_input(year, day):
     """
     grabs the input from adventofcode if the data does not already exists
     """
-    print(day)
     print("checking input")
     input_path = f"{year}/day{day.zfill(2)}/day{day.zfill(2)}.txt"
     if not os.path.isfile(input_path):
