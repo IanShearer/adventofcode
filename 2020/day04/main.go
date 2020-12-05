@@ -156,12 +156,10 @@ func main() {
 
 	totalTimeStart := time.Now()
 
-	data, err := ioutil.ReadFile("2020/inputs/day04.txt")
+	data, err := ioutil.ReadFile("day04.txt")
 	if err != nil {
 		panic(fmt.Sprintf("There was an issue reading the file: {%s}", err))
 	}
-
-	// format your input here
 
 	partOneStart := time.Now()
 	partOneAnswer := partOne(getInputAsStringSlice(data))

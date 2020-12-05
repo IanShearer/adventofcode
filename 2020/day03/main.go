@@ -43,7 +43,7 @@ func main() {
 
 	totalTimeStart := time.Now()
 
-	data, err := ioutil.ReadFile("2020/inputs/day03.txt")
+	data, err := ioutil.ReadFile("day03.txt")
 	if err != nil {
 		panic(fmt.Sprintf("There was an issue reading the file: {%s}", err))
 	}

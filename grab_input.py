@@ -13,12 +13,13 @@ def grab_input(year, day):
     grabs the input from adventofcode if the data does not already exists
     """
     print("checking input")
-    input_path = f"{year}/inputs/day{day.zfill(2)}.txt"
+    input_path = f"{year}/day{day.zfill(2)}/day{day.zfill(2)}.txt"
     if not os.path.isfile(input_path):
-        print("getting data...")
-        Path(f"{year}/inputs").mkdir(parents=True, exist_ok=True)
+        Path(f"{year}/day{day.zfill(2)}").mkdir(parents=True, exist_ok=True)
         f = open(input_path, "wb")
-        data = requests.get(f"https://adventofcode.com/{year}/day/{day}/input", cookies={'session': os.environ['AOC_SESS']}).content
+        url = f"https://adventofcode.com/{year}/day/{day}/input"
+        print(f"getting input from {url}")
+        data = requests.get(url, cookies={'session': os.environ['AOC_SESS']}).content
         f.write(data)
     print("finished getting input")
 
@@ -26,7 +27,7 @@ def create_template(year, day):
     """
     creates the golang template
     """
-    util_path = f"{year}/util.go"
+    util_path = f"{year}/day{day.zfill(2)}/util.go"
     if not os.path.isfile(util_path):
         print("creating util file...")
         Path(f"{year}").mkdir(parents=True, exist_ok=True)
@@ -59,7 +60,7 @@ func getInputAsStringSlice(d []byte) []string {
 	return strings.Split(string(d), "\\n")
 }
 """)
-    file_path = f"{year}/day{day.zfill(2)}.go"
+    file_path = f"{year}/day{day.zfill(2)}/main.go"
     if not os.path.isfile(file_path):
         print("creating file of the day...")
         Path(f"{year}").mkdir(parents=True, exist_ok=True)
@@ -84,12 +85,10 @@ func main() {
 
     totalTimeStart := time.Now()
 
-	data, err := ioutil.ReadFile(\""""+year+"""/inputs/day"""+day.zfill(2)+""".txt")
+	data, err := ioutil.ReadFile(\"day"""+day.zfill(2)+""".txt")
 	if err != nil {
 		panic(fmt.Sprintf("There was an issue reading the file: {%s}", err))
 	}
-
-    // format your input here
 
     partOneStart := time.Now()
     partOneAnswer := partOne()
@@ -122,6 +121,7 @@ args = parser.parse_args()
 def main():
     grab_input(args.year, args.day)
     create_template(args.year, args.day)
+    os.chdir(f"{args.year}/day{args.day.zfill(2)}")
 
 if __name__ == '__main__':
     main()
