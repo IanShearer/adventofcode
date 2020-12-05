@@ -121,7 +121,6 @@ args = parser.parse_args()
 def main():
     grab_input(args.year, args.day)
     create_template(args.year, args.day)
-    os.chdir(f"{args.year}/day{args.day.zfill(2)}")
 
 if __name__ == '__main__':
     main()
