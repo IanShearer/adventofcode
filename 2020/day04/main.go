@@ -164,16 +164,16 @@ func main() {
 	partOneStart := time.Now()
 	partOneAnswer := partOne(getInputAsStringSlice(data))
 	fmt.Println("Part One:", partOneAnswer)
-	partOneTime := time.Now().Sub(partOneStart)
+	partOneTime := time.Since(partOneStart)
 
 	partTwoStart := time.Now()
 	partTwoAnswer := partTwo(getInputAsStringSlice(data))
 	fmt.Println("Part Two:", partTwoAnswer)
-	partTwoTime := time.Now().Sub(partTwoStart)
+	partTwoTime := time.Since(partTwoStart)
 
 	fmt.Println("------------------")
 	fmt.Println("Time for Part One:  ", partOneTime)
 	fmt.Println("Time for Part Two:  ", partTwoTime)
-	fmt.Println("Total Time:         ", time.Now().Sub(totalTimeStart))
+	fmt.Println("Total Time:         ", time.Since(totalTimeStart))
 
 }

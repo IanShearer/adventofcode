@@ -39,7 +39,7 @@ func main() {
 		}
 	}
 
-	partOneTime := time.Now().Sub(partOneTimeBegin)
+	partOneTime := time.Since(partOneTimeBegin)
 
 	fmt.Println("Part one:", partOne)
 
@@ -67,8 +67,8 @@ func main() {
 		}
 	}
 
-	partTwoTime := time.Now().Sub(partTwoTimeBegin)
-	endTime := time.Now().Sub(totalTime)
+	partTwoTime := time.Since(partTwoTimeBegin)
+	endTime := time.Since(totalTime)
 
 	fmt.Println("Part two:", partTwo)
 	fmt.Println("------------------")
